@@ -18,9 +18,7 @@ public class Location implements Component {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long room;
-    private Long shelf;
-    private Long container;
+    private String description;
 
     private List<Component> children;
 
