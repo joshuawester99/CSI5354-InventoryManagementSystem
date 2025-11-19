@@ -30,7 +30,6 @@ public aspect CompositeProtocol {
 
     public List<Item> Leaf.getItems() {
         return List.of((Item)(Object)this);
-        return List.of((Item) this);
     }
 
     public List<Item> Composite.getItems() {
