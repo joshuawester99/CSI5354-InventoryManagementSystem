@@ -22,17 +22,16 @@ public aspect CompositeProtocol {
     public void Composite.remove(Component c) { children.remove(c); }
     public List<Component> Composite.getChildren() { return children; }
 
-    //
-    public abstract List<Item> Component.get_items_by_location();
+    public abstract List<Item> Component.getItems();
 
-    public List<Item> Leaf.get_items_by_location() {
+    public List<Item> Leaf.getItems() {
         return List.of((Item)(Object)this);
     }
 
-    public List<Item> Composite.get_items_by_location() {
+    public List<Item> Composite.getItems() {
         List<Item> items = new ArrayList<>();
         for (Component c: this.getChildren()) {
-            items.addAll(c.get_items_by_location());
+            items.addAll(c.getItems());
         }
         return items;
     }
