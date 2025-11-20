@@ -1,5 +1,7 @@
 package com.baylor.app.service;
 
+import com.baylor.app.mediator.Comp;
+import com.baylor.app.mediator.Mediator;
 import com.baylor.app.model.Item;
 import com.baylor.app.model.Location;
 import com.baylor.app.repository.LocationRepository;
@@ -11,10 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LocationService {
+public class LocationService implements Comp {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    private Mediator mediator;
+
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
 
     public Location getLocation(String locationId) {
         Optional<Location> location = locationRepository.findById(locationId);

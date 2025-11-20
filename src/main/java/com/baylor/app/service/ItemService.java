@@ -14,10 +14,17 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class ItemService{
+public class ItemService implements Comp{
 
     @Autowired
     private ItemRepository itemRepository;
+
+    private Mediator mediator;
+
+    @Override
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
 
     public Item getItem(String itemId) {
         Optional<Item> item = itemRepository.findById(itemId);

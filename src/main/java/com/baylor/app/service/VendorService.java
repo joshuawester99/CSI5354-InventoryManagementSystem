@@ -13,15 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VendorService extends Comp {
+public class VendorService implements Comp {
 
     @Autowired
     private VendorRepository vendorRepository;
 
     private Mediator mediator;
 
-    public VendorService(){
-        super(null);
+    @Override
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
     }
 
     public Vendor getVendor(String vendorId) {
