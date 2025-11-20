@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends CrudRepository<Item, String> {
     public List<Item> findByName(String name);
+    public List<Item> findByVendor(String vendor);
 
     public void deleteByName(String name);
 }

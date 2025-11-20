@@ -1,5 +1,5 @@
 package com.baylor.app.model;
 
 public enum Category {
-    ELECTRONICS, HOME, PET, FOOD, TOYS, SPORTS
+    PRODUCE, FROZEN_GOODS, CLEANING_SUPPLIES, MISCELLANEOUS
 }
