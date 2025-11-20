@@ -1,19 +1,31 @@
 package com.baylor.app.service;
 
+import com.baylor.app.mediator.Comp;
+import com.baylor.app.mediator.Mediator;
 import com.baylor.app.model.Item;
 import com.baylor.app.model.Location;
 import com.baylor.app.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
-public class ItemService {
+public class ItemService implements Comp{
 
     @Autowired
     private ItemRepository itemRepository;
+
+    private Mediator mediator;
+
+    @Override
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
 
     public Item getItem(String itemId) {
         Optional<Item> item = itemRepository.findById(itemId);
@@ -22,6 +34,16 @@ public class ItemService {
 
     public List<Item> getItemByName(String name) {
         return itemRepository.findByName(name);
+    }
+
+    public List<Item> getAllItems() {
+        List<Item> items = new ArrayList<>();
+        itemRepository.findAll().forEach(items::add);
+        return items;
+    }
+
+    public List<Item> getItemByVendor(String vendor) {
+        return itemRepository.findByVendor(vendor);
     }
 
     public Item updateItem(String itemId, Item item) {

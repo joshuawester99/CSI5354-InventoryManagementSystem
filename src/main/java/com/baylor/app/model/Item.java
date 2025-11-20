@@ -22,8 +22,13 @@ public class Item {
     private Category category;
     private String description;
     private Long quantity;
+    private Long price;
     private Long minQuantity;
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
 }
