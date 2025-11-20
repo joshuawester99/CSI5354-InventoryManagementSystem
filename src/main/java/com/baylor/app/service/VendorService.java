@@ -1,18 +1,28 @@
 package com.baylor.app.service;
 
+import com.baylor.app.mediator.Comp;
+import com.baylor.app.mediator.Mediator;
+import com.baylor.app.model.Item;
 import com.baylor.app.model.Vendor;
 import com.baylor.app.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VendorService {
+public class VendorService extends Comp {
 
     @Autowired
     private VendorRepository vendorRepository;
+
+    private Mediator mediator;
+
+    public VendorService(){
+        super(null);
+    }
 
     public Vendor getVendor(String vendorId) {
         Optional<Vendor> vendor = vendorRepository.findById(vendorId);
@@ -24,12 +34,16 @@ public class VendorService {
 
     }
 
+    public List<Vendor> getAllVendors() {
+        List<Vendor> vendors = new ArrayList<>();
+        vendorRepository.findAll().forEach(vendors::add);
+        return vendors;
+    }
+
     public Vendor updateVendor(String vendorId, Vendor vendor) {
         Vendor vendorToUpdate = getVendor(vendorId);
 
         vendorToUpdate.setName(vendor.getName());
-        vendorToUpdate.setEmail(vendor.getEmail());
-        vendorToUpdate.setPhoneNumber(vendor.getPhoneNumber());
         vendorToUpdate.setAddress(vendor.getAddress());
         vendorRepository.save(vendorToUpdate);
 

@@ -1,10 +1,12 @@
 package com.baylor.app.service;
 
+import com.baylor.app.model.Item;
 import com.baylor.app.model.Location;
 import com.baylor.app.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,12 @@ public class LocationService {
     public Location getLocation(String locationId) {
         Optional<Location> location = locationRepository.findById(locationId);
         return location.orElseThrow(() -> new IllegalArgumentException("Location Not Found"));
+    }
+
+    public List<Location> getAllLocations() {
+        List<Location> locations = new ArrayList<>();
+        locationRepository.findAll().forEach(locations::add);
+        return locations;
     }
 
     public Location updateLocation(String locationId, Location location) {

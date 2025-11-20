@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -18,4 +20,7 @@ public class Location {
     private Long room;
     private Long shelf;
     private Long container;
+
+    @OneToMany(mappedBy = "location")
+    private List<Item> items;
 }
