@@ -3,7 +3,6 @@ package com.baylor.app.service;
 import com.baylor.app.mediator.Comp;
 import com.baylor.app.mediator.Mediator;
 import com.baylor.app.model.Item;
-import com.baylor.app.model.Location;
 import com.baylor.app.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class ItemService implements Comp{
@@ -42,8 +39,8 @@ public class ItemService implements Comp{
         return items;
     }
 
-    public List<Item> getItemByVendor(String vendor) {
-        return itemRepository.findByVendor(vendor);
+    public List<Item> getItemByVendor(String vendorName) {
+        return itemRepository.findByVendorName(vendorName);
     }
 
     public Item updateItem(String itemId, Item item) {

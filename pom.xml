@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <aspectj.version>1.9.7</aspectj.version>
     </properties>
 
   <dependencies>
@@ -58,13 +59,12 @@
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
-      <version>1.9.22.1</version>
     </dependency>
 
       <dependency>
           <groupId>org.aspectj</groupId>
           <artifactId>aspectjweaver</artifactId>
-          <version>1.9.24</version>
+          <version>1.9.7</version>
       </dependency>
   </dependencies>
 
@@ -87,8 +87,18 @@
                 </execution>
             </executions>
             <configuration>
-                <source>${maven.compiler.source}</source>
-                <target>${maven.compiler.target}</target>
+                <complianceLevel>16</complianceLevel>
+                <source>16</source>
+                <target>16</target>
+                <weaveDirectories>
+                    <weaveDirectory>${project.build.outputDirectory}</weaveDirectory>
+                </weaveDirectories>
+                <aspectDirectory>${project.basedir}/src/main/java</aspectDirectory>
+                <includes>
+                    <include>**/aspectj/**</include>
+                </includes>
+                <showWeaveInfo>true</showWeaveInfo>
+                <verbose>true</verbose>
             </configuration>
         </plugin>
         <plugin>
