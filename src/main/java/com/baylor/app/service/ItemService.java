@@ -1,7 +1,7 @@
 package com.baylor.app.service;
 
-import com.baylor.app.mediator.Comp;
 import com.baylor.app.mediator.Mediator;
+import com.baylor.app.mediator.VendorLocationMediator;
 import com.baylor.app.model.Item;
 import com.baylor.app.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ItemService implements Comp{
+public class ItemService{
 
     @Autowired
     private ItemRepository itemRepository;
-
-    private Mediator mediator;
-
-    @Override
-    public void setMediator(Mediator mediator) {
-        this.mediator = mediator;
-    }
 
     public Item getItem(String itemId) {
         Optional<Item> item = itemRepository.findById(itemId);
@@ -39,8 +32,8 @@ public class ItemService implements Comp{
         return items;
     }
 
-    public List<Item> getItemByVendor(String vendorName) {
-        return itemRepository.findByVendorName(vendorName);
+    public List<Item> getItemByVendor(Long vendorId) {
+        return itemRepository.findByVendorId(vendorId);
     }
 
     public Item updateItem(String itemId, Item item) {

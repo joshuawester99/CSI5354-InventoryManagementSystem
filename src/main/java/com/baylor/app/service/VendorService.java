@@ -1,7 +1,7 @@
 package com.baylor.app.service;
 
-import com.baylor.app.mediator.Comp;
 import com.baylor.app.mediator.Mediator;
+import com.baylor.app.mediator.VendorLocationMediator;
 import com.baylor.app.model.Item;
 import com.baylor.app.model.Vendor;
 import com.baylor.app.repository.VendorRepository;
@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VendorService implements Comp {
+public class VendorService{
+
+    Mediator mediator;
 
     @Autowired
     private VendorRepository vendorRepository;
 
-    private Mediator mediator;
-
-    @Override
+    @Autowired
     public void setMediator(Mediator mediator) {
         this.mediator = mediator;
     }
@@ -62,6 +62,15 @@ public class VendorService implements Comp {
         vendorRepository.deleteById(vendorId);
         responseMessage = String.format("Vendor: %s Deleted Successfully", vendorId);
         return responseMessage;
+    }
+
+    public Long getAvailableSpace(String locationId){
+        return mediator.getAvailableSpace(locationId);
+    }
+
+    public String reserveLocation(String vendorId, String locationId) {
+        String responseMessage = null;
+        return mediator.reserveLocation(locationId, vendorId);
     }
 
 }
